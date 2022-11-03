@@ -1,7 +1,7 @@
 """
 Demo Click app.
 """
-import json
+
 import click
 import boto3
 
