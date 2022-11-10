@@ -11,7 +11,7 @@
 ## Cluster setup
 
 ```sh
-eksctl create cluster --name eks-alb-demo --region eu-central-1 --full-ecr-access --enable-ssm --nodegroup-name demo-group -P --nodes-min 2 --nodes-max 3 --spot
+eksctl create cluster --name eks-alb-demo --region eu-central-1 --full-ecr-access  --nodes-min 3 --spot
 ```
 
 ## install metrics server
