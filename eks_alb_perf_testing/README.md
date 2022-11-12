@@ -4,6 +4,7 @@
 - [x] install metrics server
 - [ ] Install alb driver
 - [x] deploy httpbin
+- [ ] Install k6
 - [ ] deploy load server
 - [ ] deploy locust script
 - [ ] export test resaults
@@ -11,14 +12,14 @@
 ## Cluster setup
 
 ```sh
-eksctl create cluster --name eks-alb-demo --region eu-central-1 --full-ecr-access  --nodes-min 3 --spot
+eksctl create cluster --name httpbin --region eu-west-2 --full-ecr-access --fargate
 ```
 
 ## install metrics server
 
 ```sh
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-# then to test
+
 kubectl get deployment metrics-server -n kube-system
 ```
 
@@ -29,5 +30,17 @@ kubectl get deployment metrics-server -n kube-system
 ## Deploy httpbin to cluster
 
 ```sh
-kubectl create deployment --image=kennethreitz/httpbin --replicas=2 --port=80
+kubectl create deployment --image=kennethreitz/httpbin
+```
+
+## Install k6 on Cloud9
+```sh
+sudo yum install https://dl.k6.io/rpm/repo.rpm
+
+sudo yum install --nogpgcheck k6
+```
+
+## Running k6 test
+```sh
+k6 run --vue=50 --time=5m script.js
 ```
