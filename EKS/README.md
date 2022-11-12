@@ -7,18 +7,20 @@
 ## Creating cluster using eksctl
 
 ```bash
-eksctl create cluster --name <my_claster> --region eu-central-1 --with-oidc\
---fargate --full-ecr-access --alb-ingress-access -v --dry-run # remove dry-run after test.
+eksctl create cluster --name <my_claster> --region eu-central-1 --with-oidc --fargate --asg-access --full-ecr-access --alb-ingress-access --dry-run
 ```
+works, but it takes around 30 minutes to create cluster.
+---
 
 ## Enabling loging in eks cluster
 
 ```bash
-eksctl utils update-claster-logging --enable-types=all
+eksctl utils update-cluster-logging --enable-types=all
+# after test run cmd. abowe run with flagg --approve
 ```
+---
 
 ## Listing available plugins for specified cluster
-
 ```bash
 eksctl utils describe-addon-versions --cluster <cluster-name>
 ```
@@ -57,6 +59,7 @@ eksctl utils set-public-access-cidrs --cluster=<cluster> 1.1.1.1/32,2.2.2.0/24
 
 ## Links
 
+[EKSCTL install](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html) <br/>
 [EKS Docs](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) <br/>
 [eksctl cli](https://eksctl.io/) <br/>
 [EKS Workshop](https://www.eksworkshop.com/) <br/>

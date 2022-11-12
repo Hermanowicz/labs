@@ -28,6 +28,3 @@ kubectl get deployment metrics-server -n kube-system
 
 ## Deploy httpbin to cluster
 
-```sh
-kubectl create deployment --image=kennethreitz/httpbin --replicas=2 --port=80
-```
