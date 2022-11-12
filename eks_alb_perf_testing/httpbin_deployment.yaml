@@ -5,6 +5,7 @@ metadata:
     app: httpbin
     env: test
   name: httpbin
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -20,14 +21,17 @@ spec:
     metadata:
       labels:
         app: httpbin
+        env: test
     spec:
       containers:
       - image: kennethreitz/httpbin
-        name: httpbin
+        name: http-bin
         ports:
         - containerPort: 80
         resources:
           requests:
             memory: "768Mi"
+            cpu: 1
           limits:
             memory: "1024Mi"
+            cpu: 1
