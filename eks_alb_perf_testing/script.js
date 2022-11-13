@@ -8,7 +8,9 @@ export const options = {
   stages: [
     { duration: '1m', target: 20 },
     { duration: '3m', target: 50 },
-    { duration: '1m', target: 0 },
+    { duration: '10m', target: 250 },
+    { duration: '10m', target: 150 },
+    { duration: '1m', target: 35 },
   ],
   thresholds: {
     http_req_failed: ['rate<0.02'], // http errors should be less than 2%
@@ -17,6 +19,6 @@ export const options = {
 }
 
 export default function main() {
-  let response = http.get('https://test-api.k6.io/public/crocodiles/')
+  let response = http.get('http://aa8e11e0c067f40d3ace6d81abc30892-835924440.eu-central-1.elb.amazonaws.com/uuid')
   sleep(1)
 }
