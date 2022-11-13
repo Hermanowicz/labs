@@ -35,18 +35,18 @@ eksctl utils update-cluster-logging --enable-types all
 ## Create oidc
 
 ```sh
-eksctl utils associate-iam-oidc-provider --region=eu-central-1 --cluster=httpbin --approve
+eksctl utils associate-iam-oidc-provider --region=eu-central-1 --cluster=demo --approve
 ```
 
 ## create serviceaccount
 
 ```sh
 eksctl create iamserviceaccount \
-  --cluster=my-cluster \
+  --cluster=demo \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
-  --attach-policy-arn=arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::<my aws id >:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
 ```
 
@@ -57,17 +57,17 @@ eksctl create iamserviceaccount \
 ```sh
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=my-cluster \
+  --set clusterName=<cluster name> \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=eu-central-1 \
-  --set vpcId=vpc-0c3674346ac30cec4
+  --set vpcId=<newvpcid>
 ```
 
 ## Deploy httpbin to cluster
 
 ```sh
-kubectl create deployment --image=kennethreitz/httpbin --replicas=2 --port=80
+kubectl create deployment --image=kennethreitz/httpbin --replicas=3 --port=80
 ```
 
 ## Running k6 test
